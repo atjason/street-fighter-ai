@@ -31,12 +31,28 @@ conda activate StreetFighterAI
 
 # 安装 Python 代码库
 cd [项目上级文件夹]/street-fighter-ai/main
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 运行程序脚本定位 gym-retro 游戏文件夹位置
 cd ..
 python .\utils\print_game_lib_folder.py
 ```
+
+手动安装 gym-0.21.0：
+
+1. 下载 gym-0.21.0.tar.gz
+从 https://pypi.tuna.tsinghua.edu.cn/simple/gym 下载 gym-0.21.0.tar.gz，然后解压：
+
+tar -xvzf gym-0.21.0.tar.gz
+cd gym-0.21.0
+
+2. 手动编辑 setup.py
+用文本编辑器打开 setup.py，找到：'opencv-python>=3.'
+修改为：'opencv-python>=3.0.0'
+然后保存。
+
+3. 安装
+pip install .
 
 控制台输出文件夹路径后，将其复制到文件资源管理器中，跳转到对应路径。该文件夹为 gym-retro 下《街头霸王·二：冠军特别版》的游戏数据文件夹，其中包含了游戏 ROM 文件和数据配置文件。将本项目中 `data/` 文件夹下的 `Champion.Level12.RyuVsBison.state`、`data.json`、`metadata.json`、`scenario.json` 四个文件复制到该文件夹中，覆盖原有文件（可能需要提供管理员权限）。其中 `.state` 文件为《街头霸王·二：冠军特别版》难度四最后一关开局的游戏存档，三个 `.json` 文件为 gym-retro 配置文件，存储了游戏信息的内存地址（本项目只用到了其中的 [agent_hp] 与 [enemey_hp]，用于实时读取游戏人物的生命值）。
 
